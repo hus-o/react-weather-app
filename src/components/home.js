@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router-dom"
+import Image from "./image"
 
 class Search extends Component {
     constructor(props) {
@@ -26,12 +27,13 @@ class Search extends Component {
 
     render() { 
         return ( 
-            <React.Fragment>
+            <div className="home">
+            <Image />
             <form onSubmit={this.handleSubmit}>
                 <input type="text" placeholder="Search for a city" value={this.state.searchValue} onChange={this.handleChange} />
                 <input type="submit" value="Submit" />
             </form>
-            </React.Fragment>
+            </div>
          );
     }
 }

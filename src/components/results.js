@@ -1,43 +1,46 @@
 import React, { Component } from 'react';
 import axios from "axios"
+import Image from "./image"
 
 class Results extends Component {
     state = {
         weatherData: null,
-        imageData: null
+        imageData: null,
+        errorMessage: ""
      }
 
     async componentDidMount(){
-        const userQuery = this.props.location.state.searchValue
-        console.log(userQuery)
-        const weatherResponse = await axios(`https://api.openweathermap.org/data/2.5/weather?q=${userQuery}&units=metric&appid=3c812f1eeeef6ad3c602a713b3d4806b`)
-        console.log(weatherResponse)
-        this.setState({weatherData: weatherResponse});
-    }
-
-    getImage = () =>{
-        return(
-            `https://source.unsplash.com/350x350/?${this.state.weatherData.data.name},${this.state.weatherData.data.weather[0].main}`
-        )
+        try{
+            const userQuery = this.props.location.state.searchValue
+            const weatherResponse = await axios(`https://api.openweathermap.org/data/2.5/weather?q=${userQuery}&units=metric&appid=3c812f1eeeef6ad3c602a713b3d4806b`)
+            this.setState({weatherData: weatherResponse.data})
+        }
+        catch(err){
+            this.setState({errorMessage:err})
+        }
     }
 
     render() {
         return (
-            <React.Fragment>
+            <div className="results">
                 {(this.state.weatherData) ?
                 <div className="weatherInfo">
-                    <img src={this.getImage()} alt="city weather"></img>
+                    <Image weatherData={this.state.weatherData}/>
                     <div className="weatherDesc">
-                        <p>{this.state.weatherData.data.weather[0].main}</p>
-                        <p>{this.state.weatherData.data.weather[0].description}</p>
+                        <p id="weatherView">{this.state.weatherData.weather[0].main}</p>
+                        <p id="weatherViewDesc">{this.state.weatherData.weather[0].description}</p>
                     </div>
                     <div className="weatherMainData">
-                        <p>Temperature (celcius): {this.state.weatherData.data.main.temp}</p>
+                        <p>Temperature (celcius): {this.state.weatherData.main.temp}</p>
                     </div>
+                    <a href="/"><button>Search Again</button></a>
                 </div>
                 :
-                <p>Loading</p>}
-            </React.Fragment>
+                <p>
+                    {this.state.errorMessage && <h3>{this.state.errorMessage}</h3>}
+                </p>
+                }
+            </div>
             
          );
     }
