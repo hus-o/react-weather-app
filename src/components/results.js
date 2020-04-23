@@ -13,15 +13,20 @@ class Results extends Component {
         const weatherResponse = await axios(`https://api.openweathermap.org/data/2.5/weather?q=${userQuery}&units=metric&appid=3c812f1eeeef6ad3c602a713b3d4806b`)
         console.log(weatherResponse)
         this.setState({weatherData: weatherResponse});
-        console.log(this.state.weatherData)
     }
 
+    getImage = () =>{
+        return(
+            `https://source.unsplash.com/350x350/?${this.state.weatherData.data.name},${this.state.weatherData.data.weather[0].main}`
+        )
+    }
 
     render() {
         return (
             <React.Fragment>
                 {(this.state.weatherData) ?
                 <div className="weatherInfo">
+                    <img src={this.getImage()} alt="city weather"></img>
                     <div className="weatherDesc">
                         <p>{this.state.weatherData.data.weather[0].main}</p>
                         <p>{this.state.weatherData.data.weather[0].description}</p>

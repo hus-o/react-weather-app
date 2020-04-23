@@ -11,4 +11,6 @@
 * Further styling
 * Cleanup and check everything works as intended
 
-
+### Notes
+* Struggled with making form submit redirect to new route with the search data - managed to solve using withRouter history
+* Missing "https" infront of weather API string resulted in 404, took about an hour to realise and fix
