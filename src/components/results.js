@@ -27,7 +27,7 @@ class Results extends Component {
                 <div className="weatherInfo">
                     <Image weatherData={this.state.weatherData}/>
                     <div className="weatherDesc">
-                        <p id="weatherView">{this.state.weatherData.weather[0].main}</p>
+                        <p id="weatherView">You'll see some: {this.state.weatherData.weather[0].main}</p>
                         <p id="weatherViewDesc">{this.state.weatherData.weather[0].description}</p>
                     </div>
                     <div className="weatherMainData">
