@@ -22,7 +22,7 @@ describe("Results", () => {
     const component = shallow(<Results />)
     component.setState({weatherData:data})
     it("renders weather view", () =>{
-        expect(component.find(".weatherDesc").text()).toBe("Clearclear sky")
+        expect(component.find(".weatherDesc").text()).toBe("You'll see some: Clearclear sky")
     })
     it("renders weather temperature", ()=>{
         expect(component.find(".weatherMainData").text()).toBe("Temperature (celcius): 19.9")

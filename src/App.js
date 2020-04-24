@@ -6,14 +6,14 @@ import {BrowserRouter, Switch, Route} from "react-router-dom"
 
 function App() {
   return (
-    <React.Fragment>
+    // <React.Fragment>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Search} />
           <Route path="/results" component={Results} />
         </Switch>
       </BrowserRouter>
-    </React.Fragment>
+    // </React.Fragment>
   );
 }
 
